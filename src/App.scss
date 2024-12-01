@@ -1,0 +1,19 @@
+@import './styles/variables';
+
+.app-wrapper {
+  width: 100%;
+  overflow-x: hidden;
+  background-color: $app-bg-color;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+
+  .layout-wrapper {
+    width: 100%;
+  }
+
+  main {
+    margin-top: 24px;
+  }
+}
+

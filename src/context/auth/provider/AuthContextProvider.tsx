@@ -10,7 +10,7 @@ type AuthUser = {
 export type AuthContextType = {
   isAuthenticated: boolean;
   authUser: AuthUser | undefined;
-  login: (username: string, password: string) => void;
+  login: (username: string, password: string) => boolean;
   logout: () => void;
 };
 
@@ -29,19 +29,27 @@ const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
       (user) => user.username === username && user.password === password
     );
 
-    if (!!dbUser) {
-      setIsAuthenticated(true);
-      setAuthUser({
-        userId: dbUser.id,
-        username: dbUser.username,
-        fullname: dbUser.fullname,
-      });
+    if (!dbUser) {
+      return false;
     }
+
+    setIsAuthenticated(true);
+    setAuthUser({
+      userId: dbUser.id,
+      username: dbUser.username,
+      fullname: dbUser.fullname,
+    });
+
+    localStorage.setItem("isAuthenticated", "true");
+
+    return true;
   };
 
   const logout = () => {
     setIsAuthenticated(false);
     setAuthUser(undefined);
+
+    localStorage.clear();
   };
 
   return (
