@@ -40,3 +40,5 @@ export type ShipmentDetails = {
   temperature: TimestampValuePair[];
   humidity: TimestampValuePair[];
 };
+
+export type ExtendedShipment = ShipmentDetails & Omit<Shipment, "shipmentId">;

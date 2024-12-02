@@ -2,7 +2,13 @@ import companiesMock from "./data/companies.json";
 import shipmentsMock from "./data/shipments.json";
 import shipmentDetails1Mock from "./data/shipments_details_1.json";
 import shipmentDetails2Mock from "./data/shipments_details_2.json";
-import { Company, CompaniesList, ShipmentsList, Shipment } from "./types/types";
+import {
+  Company,
+  CompaniesList,
+  ShipmentsList,
+  Shipment,
+  ExtendedShipment,
+} from "./types/types";
 
 const shipmentsAPI = {
   getCompanies: async () => {
@@ -19,7 +25,9 @@ const shipmentsAPI = {
       resolve(companyShipments);
     });
   },
-  getShipmentDetails: async (shipmentId: Shipment["shipmentId"]) => {
+  getShipmentDetails: async (
+    shipmentId: Shipment["shipmentId"]
+  ): Promise<ExtendedShipment> => {
     let extendedShipment = shipmentsMock.find(
       (shipment) => shipment.shipmentId === shipmentId
     );
@@ -27,22 +35,27 @@ const shipmentsAPI = {
     const shipmentDetails =
       shipmentDetails1Mock.find(
         (shipment) => shipment.shipmentId === shipmentId
-      ) ||
+      ) ??
       shipmentDetails2Mock.find(
         (shipment) => shipment.shipmentId === shipmentId
-      );
+      ) ??
+      shipmentDetails2Mock[0];
+
+    console.log("shipmentDetailsMock", shipmentDetails);
 
     if (!!extendedShipment) {
       extendedShipment = { ...extendedShipment, ...shipmentDetails };
     }
 
     return new Promise((resolve, reject) => {
-      if (!extendedShipment || !shipmentDetails) {
+      if (!extendedShipment && !shipmentDetails) {
         reject({ message: "Shipment not found" });
         return;
       }
 
-      resolve(extendedShipment);
+      console.log(extendedShipment);
+
+      resolve(extendedShipment as ExtendedShipment);
     });
   },
 };
