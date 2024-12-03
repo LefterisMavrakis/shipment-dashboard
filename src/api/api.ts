@@ -41,8 +41,6 @@ const shipmentsAPI = {
       ) ??
       shipmentDetails2Mock[0];
 
-    console.log("shipmentDetailsMock", shipmentDetails);
-
     if (!!extendedShipment) {
       extendedShipment = { ...extendedShipment, ...shipmentDetails };
     }
@@ -52,8 +50,6 @@ const shipmentsAPI = {
         reject({ message: "Shipment not found" });
         return;
       }
-
-      console.log(extendedShipment);
 
       resolve(extendedShipment as ExtendedShipment);
     });

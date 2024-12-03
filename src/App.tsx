@@ -12,6 +12,8 @@ import RouteGuard from "./pages/RouteGuard";
 import Home from "./pages/home/Home";
 import ShipmentDetails from "./pages/shipmentDetails/ShipmentDetails";
 import ShipmentsModal from "./components/shipmentsModal/ShipmentsModal";
+
+import "leaflet/dist/leaflet.css";
 import "./App.scss";
 
 const App = () => {

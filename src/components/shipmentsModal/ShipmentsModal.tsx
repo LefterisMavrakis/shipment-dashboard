@@ -15,7 +15,6 @@ import companiesMock from "../../api/data/companies.json";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiPaper-root": {
-    minWidth: "500px",
     minHeight: "60vh",
     maxHeight: "80vh",
     height: "100%",
@@ -65,7 +64,7 @@ const ShipmentsModal = () => {
       open={!!paramsCompanyId}
     >
       <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-        {`${companyName || "Company"}`} - Shipments
+        {`${companyName || "Company"} - Shipments(${companyShipments.length})`}
       </DialogTitle>
 
       <IconButton

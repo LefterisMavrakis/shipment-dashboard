@@ -34,3 +34,7 @@ export const StyledFlexBox = styled(Flex)`
   padding: 12px 20px;
   box-sizing: border-box;
 `;
+
+export const StyledFlexBoxWithBorder = styled(StyledFlexBox)`
+  border-bottom: 1px solid #f2f4f5;
+`;
