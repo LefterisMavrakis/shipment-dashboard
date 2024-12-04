@@ -107,9 +107,9 @@ describe("ShipmentDetails Component", () => {
     const navigateMock = jest.fn();
 
     render(
-      <MemoryRouter initialEntries={["/shipment/123"]}>
+      <MemoryRouter initialEntries={["/details/123"]}>
         <Routes>
-          <Route path="/shipment/:shipmentId" element={<ShipmentDetails />} />
+          <Route path="/details/:shipmentId" element={<ShipmentDetails />} />
         </Routes>
       </MemoryRouter>
     );
