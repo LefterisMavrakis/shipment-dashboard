@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import ConstructionIcon from "@mui/icons-material/Construction";
 import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
 import Typography from "@mui/material/Typography";

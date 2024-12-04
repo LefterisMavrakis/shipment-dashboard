@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router";
 import Typography from "@mui/material/Typography";
 import { Shipment } from "../../api/types/types";
 import Flex from "../shared/styledFlex";
@@ -27,7 +27,7 @@ const ShipmentItem = (props: ShipmentItemProps) => {
 
   return (
     <ShipmentCard>
-      <Link to={`/details/${shipmentId}`}>
+      <NavLink to={`/details/${shipmentId}`}>
         <StyledFlexBox flexDirection="column">
           <Flex spacingSize="2px" alignItems="center" wrap>
             <Typography variant="subtitle2">Shipment ID:</Typography>
@@ -66,7 +66,7 @@ const ShipmentItem = (props: ShipmentItemProps) => {
             <Typography variant="subtitle1">{plannedDepartureDate}</Typography>
           </Flex>
         </StyledFlexBox>
-      </Link>
+      </NavLink>
     </ShipmentCard>
   );
 };

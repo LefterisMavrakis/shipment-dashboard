@@ -1,6 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router";
 import { useAuth } from "../context/auth/hooks/useAuth/useAuth";
 import Header from "../components/header/Header";
 import { Constraint } from "../components/shared/styledCommon";

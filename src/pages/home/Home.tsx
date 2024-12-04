@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router";
 import CompaniesList from "../../components/companiesList/CompaniesList";
 import Flex from "../../components/shared/styledFlex";
 

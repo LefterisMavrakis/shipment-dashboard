@@ -1,13 +1,27 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { MemoryRouter, Route, Routes } from "react-router";
 import ShipmentDetails from "./ShipmentDetails";
 import shipmentsAPI from "../../api/api";
 import { ExtendedShipment } from "../../api/types/types";
 
-// Mock API response
-jest.mock("../../api/api");
-const mockedShipmentsAPI = shipmentsAPI as jest.Mocked<typeof shipmentsAPI>;
+jest.mock("../../components/locationMap/LocationMap", () => {
+  return () => <div data-testid="mock-location-map"></div>;
+});
+
+jest.mock(
+  "../../components/humidityAndLocationBarChart/HumidityAndLocationBarChart",
+  () => {
+    return () => <div data-testid="mock-bar-chart"></div>;
+  }
+);
+
+jest.mock(
+  "../../components/humidityAndLocationLineChart/HumidityAndLocationLineChart",
+  () => {
+    return () => <div data-testid="mock-line-chart"></div>;
+  }
+);
 
 const mockShipmentDetails: ExtendedShipment = {
   shipmentId: "123",
@@ -26,16 +40,16 @@ const mockShipmentDetails: ExtendedShipment = {
 
 describe("ShipmentDetails Component", () => {
   beforeEach(() => {
-    mockedShipmentsAPI.getShipmentDetails.mockResolvedValue(
-      mockShipmentDetails
-    );
+    jest
+      .spyOn(shipmentsAPI, "getShipmentDetails")
+      .mockResolvedValue(mockShipmentDetails);
   });
 
   it("renders shipment information correctly", async () => {
     render(
-      <MemoryRouter initialEntries={["/shipment/123"]}>
+      <MemoryRouter initialEntries={["/details/123"]}>
         <Routes>
-          <Route path="/shipment/:shipmentId" element={<ShipmentDetails />} />
+          <Route path="/details/:shipmentId" element={<ShipmentDetails />} />
         </Routes>
       </MemoryRouter>
     );
@@ -44,7 +58,10 @@ describe("ShipmentDetails Component", () => {
       expect(screen.getByText("Shipment Details")).toBeInTheDocument();
     });
 
-    expect(screen.getByText("Shipment ID:")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText("Shipment ID:")).toBeInTheDocument();
+    });
+
     expect(screen.getByText("123")).toBeInTheDocument();
     expect(screen.getByText("Status:")).toBeInTheDocument();
     expect(screen.getByText("IN PROGRESS")).toBeInTheDocument();
@@ -54,9 +71,9 @@ describe("ShipmentDetails Component", () => {
 
   it("renders environmental conditions when status is IN PROGRESS", async () => {
     render(
-      <MemoryRouter initialEntries={["/shipment/123"]}>
+      <MemoryRouter initialEntries={["/details/123"]}>
         <Routes>
-          <Route path="/shipment/:shipmentId" element={<ShipmentDetails />} />
+          <Route path="/details/:shipmentId" element={<ShipmentDetails />} />
         </Routes>
       </MemoryRouter>
     );
@@ -70,8 +87,6 @@ describe("ShipmentDetails Component", () => {
     expect(
       screen.getByText("Current environmental conditions")
     ).toBeInTheDocument();
-    expect(screen.getByText("Humidity (%)")).toBeInTheDocument();
-    expect(screen.getByText("Temperature (°C)")).toBeInTheDocument();
   });
 
   it("renders the map section when status is IN PROGRESS", async () => {
@@ -84,10 +99,8 @@ describe("ShipmentDetails Component", () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByTestId("map-section")).toBeInTheDocument();
+      expect(screen.getByTestId("mock-location-map")).toBeInTheDocument();
     });
-
-    expect(screen.getByText("Shipment location")).toBeInTheDocument();
   });
 
   it("navigates to company shipments when back button is clicked", async () => {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router";
 import Button from "@mui/material/Button";
 import MenuIcon from "@mui/icons-material/Menu";
 import Box from "@mui/material/Box";
@@ -24,14 +24,14 @@ const Header = () => {
     <Box role="presentation" onClick={toggleDrawer}>
       <List>
         <ListItem key={"companies"} disablePadding>
-          <Link to="/">
+          <NavLink to="/">
             <ListItemButton>
               <ListItemIcon>
                 <StoreIcon />
               </ListItemIcon>
               <ListItemText primary={"Companies"} />
             </ListItemButton>
-          </Link>
+          </NavLink>
         </ListItem>
       </List>
     </Box>
