@@ -63,7 +63,10 @@ const ShipmentsModal = () => {
       aria-labelledby="customized-dialog-title"
       open={!!paramsCompanyId}
     >
-      <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+      <DialogTitle
+        sx={{ m: 0, p: 2, paddingRight: 7 }}
+        id="customized-dialog-title"
+      >
         {`${companyName || "Company"} - Shipments(${companyShipments.length})`}
       </DialogTitle>
 
@@ -73,7 +76,7 @@ const ShipmentsModal = () => {
         sx={(theme) => ({
           position: "absolute",
           right: 8,
-          top: 8,
+          top: 12,
           color: theme.palette.grey[500],
         })}
       >
@@ -82,7 +85,7 @@ const ShipmentsModal = () => {
 
       <DialogContent dividers>
         {hasShipments ? (
-          <Flex $flexDirection="column" $spacingSize="8px" $fullwidth>
+          <Flex $flexDirection="column" $spacingSize="12px" $fullwidth>
             {companyShipments.map((shipment) => (
               <ShipmentItem {...shipment} />
             ))}

@@ -12,9 +12,12 @@ import ListItemText from "@mui/material/ListItemText";
 import StoreIcon from "@mui/icons-material/Store";
 import { HeaderWrapper } from "./styledComponents";
 import { Constraint } from "../shared/styledCommon";
+import Flex from "../shared/styledFlex";
+import { useAuth } from "../../context/auth/hooks/useAuth/useAuth";
 
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const { logout } = useAuth() || {};
 
   const toggleDrawer = () => {
     setDrawerOpen((prevValue) => !prevValue);
@@ -24,7 +27,7 @@ const Header = () => {
     <Box role="presentation" onClick={toggleDrawer}>
       <List>
         <ListItem key={"companies"} disablePadding>
-          <NavLink to="/">
+          <NavLink to="/" style={{ textDecoration: "none", color: "inherit" }}>
             <ListItemButton>
               <ListItemIcon>
                 <StoreIcon />
@@ -42,11 +45,17 @@ const Header = () => {
       <nav className="app-header">
         <HeaderWrapper>
           <Constraint>
-            <div className="app-menu-button">
-              <Button onClick={toggleDrawer}>
-                <MenuIcon /> MENU
-              </Button>
-            </div>
+            <Flex $justifyContent="space-between" $fullwidth>
+              <div className="app-menu-button">
+                <Button onClick={toggleDrawer}>
+                  <MenuIcon /> MENU
+                </Button>
+              </div>
+
+              <div className="app-logout-button">
+                <Button onClick={logout}>Log out</Button>
+              </div>
+            </Flex>
           </Constraint>
         </HeaderWrapper>
       </nav>
