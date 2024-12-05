@@ -28,40 +28,40 @@ const ShipmentItem = (props: ShipmentItemProps) => {
   return (
     <ShipmentCard>
       <NavLink to={`/details/${shipmentId}`}>
-        <StyledFlexBox flexDirection="column">
-          <Flex spacingSize="2px" alignItems="center" wrap>
+        <StyledFlexBox $flexDirection="column">
+          <Flex $spacingSize="2px" $alignItems="center" $wrap>
             <Typography variant="subtitle2">Shipment ID:</Typography>
             <Typography variant="subtitle1">{shipmentId}</Typography>
           </Flex>
 
-          <Flex spacingSize="2px" alignItems="center" wrap>
+          <Flex $spacingSize="2px" $alignItems="center" $wrap>
             <Typography variant="subtitle2">Status:</Typography>
             <Typography variant="subtitle1">{status}</Typography>
           </Flex>
 
-          <Flex spacingSize="2px" alignItems="center" wrap>
+          <Flex $spacingSize="2px" $alignItems="center" $wrap>
             <Typography variant="subtitle2">Reference name:</Typography>
             <Typography variant="subtitle1">{referenceName}</Typography>
           </Flex>
 
-          <Flex spacingSize="2px" alignItems="center" wrap>
+          <Flex $spacingSize="2px" $alignItems="center" $wrap>
             <Typography variant="subtitle2">Destination name:</Typography>
             <Typography variant="subtitle1">{destinationName}</Typography>
           </Flex>
 
-          <Flex spacingSize="2px" alignItems="center" wrap>
+          <Flex $spacingSize="2px" $alignItems="center" $wrap>
             <Typography variant="subtitle2">Planned destination:</Typography>
             <Typography variant="subtitle1">
               {plannedDestinationDate}
             </Typography>
           </Flex>
 
-          <Flex spacingSize="2px" alignItems="center" wrap>
+          <Flex $spacingSize="2px" $alignItems="center" $wrap>
             <Typography variant="subtitle2">Departure name:</Typography>
             <Typography variant="subtitle1">{departureName}</Typography>
           </Flex>
 
-          <Flex spacingSize="2px" alignItems="center" wrap>
+          <Flex $spacingSize="2px" $alignItems="center" $wrap>
             <Typography variant="subtitle2">Planned departure:</Typography>
             <Typography variant="subtitle1">{plannedDepartureDate}</Typography>
           </Flex>

@@ -82,7 +82,7 @@ const ShipmentsModal = () => {
 
       <DialogContent dividers>
         {hasShipments ? (
-          <Flex flexDirection="column" spacingSize="8px" fullwidth>
+          <Flex $flexDirection="column" $spacingSize="8px" $fullwidth>
             {companyShipments.map((shipment) => (
               <ShipmentItem {...shipment} />
             ))}

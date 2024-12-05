@@ -44,13 +44,13 @@ const CompanyItem = (props: CompanyItemProps) => {
 
   return (
     <>
-      <Card flexDirection="column">
+      <Card $flexDirection="column">
         <StyledFlexBoxWithBorder
-          spacingSize="8px"
-          alignItems="center"
-          justifyContent="space-between"
+          $spacingSize="8px"
+          $alignItems="center"
+          $justifyContent="space-between"
         >
-          <Flex spacingSize="8px" alignItems="center">
+          <Flex $spacingSize="8px" $alignItems="center">
             <IconBox>{COMPANY_TYPE_ICONS_MAP[businessType]}</IconBox>
             <Typography variant="h6">{name}</Typography>
           </Flex>
@@ -60,30 +60,30 @@ const CompanyItem = (props: CompanyItemProps) => {
           </Button>
         </StyledFlexBoxWithBorder>
 
-        <StyledFlexBox flexDirection="column" spacingSize="2px">
-          <Flex spacingSize="2px" alignItems="center" wrap>
+        <StyledFlexBox $flexDirection="column" $spacingSize="2px">
+          <Flex $spacingSize="2px" $alignItems="center" $wrap>
             <Typography variant="subtitle2">Address:</Typography>
             <Typography variant="subtitle1">{companyAddress}</Typography>
           </Flex>
 
-          <Flex spacingSize="2px" alignItems="center" wrap>
+          <Flex $spacingSize="2px" $alignItems="center" $wrap>
             <Typography variant="subtitle2">Incorporation country:</Typography>
             <Typography variant="subtitle1">
               {countryOfIncorporation}
             </Typography>
           </Flex>
 
-          <Flex spacingSize="2px" alignItems="center" wrap>
+          <Flex $spacingSize="2px" $alignItems="center" $wrap>
             <Typography variant="subtitle2">Registration number:</Typography>
             <Typography variant="subtitle1">{registrationNumber}</Typography>
           </Flex>
 
-          <Flex spacingSize="2px" alignItems="center" wrap>
+          <Flex $spacingSize="2px" $alignItems="center" $wrap>
             <Typography variant="subtitle2">Verified at:</Typography>
             <Typography variant="subtitle1">{verifiedAt}</Typography>
           </Flex>
 
-          <Flex spacingSize="2px" alignItems="center" wrap>
+          <Flex $spacingSize="2px" $alignItems="center" $wrap>
             <Typography variant="subtitle2">Created at:</Typography>
             <Typography variant="subtitle1">{createdDate}</Typography>
           </Flex>

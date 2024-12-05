@@ -38,10 +38,10 @@ const LoginPage = () => {
 
   return (
     <Flex
-      flexDirection="column"
-      spacingSize="16px"
+      $flexDirection="column"
+      $spacingSize="16px"
+      $justifyContent="center"
       className="login-wrapper"
-      justifyContent="center"
     >
       <Typography variant="h4">Login</Typography>
       <Typography color="textDisabled">

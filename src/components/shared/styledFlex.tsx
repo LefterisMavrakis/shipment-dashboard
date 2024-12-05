@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Flex = styled.div<{
-  spacingSize?:
+  $spacingSize?:
     | "2px"
     | "4px"
     | "8px"
@@ -11,8 +11,8 @@ const Flex = styled.div<{
     | "24px"
     | "32px";
 
-  flexDirection?: "row" | "column";
-  justifyContent?:
+  $flexDirection?: "row" | "column";
+  $justifyContent?:
     | "space-around"
     | "space-between"
     | "space-evenly"
@@ -21,7 +21,7 @@ const Flex = styled.div<{
     | "flex-end"
     | "initial"
     | "inherit";
-  alignItems?:
+  $alignItems?:
     | "stretch"
     | "center"
     | "flex-start"
@@ -29,7 +29,7 @@ const Flex = styled.div<{
     | "baseline"
     | "initial"
     | "inherit";
-  alignSelf?:
+  $alignSelf?:
     | "stretch"
     | "center"
     | "flex-start"
@@ -37,48 +37,48 @@ const Flex = styled.div<{
     | "baseline"
     | "initial"
     | "inherit";
-  flex?: number | string;
-  wrap?: boolean;
-  fullwidth?: boolean;
+  $flex?: number | string;
+  $wrap?: boolean;
+  $fullwidth?: boolean;
 }>`
   display: flex;
 
-  ${({ justifyContent }) =>
-    justifyContent &&
+  ${({ $justifyContent }) =>
+    $justifyContent &&
     `
-    justify-content: ${justifyContent};
+    justify-content: ${$justifyContent};
   `}
 
-  ${({ flex }) =>
-    flex &&
+  ${({ $flex }) =>
+    $flex &&
     `
-    flex: ${flex};
+    flex: ${$flex};
   `}
 
-   ${({ fullwidth }) =>
-    fullwidth &&
+   ${({ $fullwidth }) =>
+    $fullwidth &&
     `
     width: 100%;
   `}
 
 
-  ${({ alignItems }) =>
-    alignItems &&
+  ${({ $alignItems }) =>
+    $alignItems &&
     `
-    align-items: ${alignItems};
+    align-items: ${$alignItems};
   `}
 
-  ${({ alignSelf }) =>
-    alignSelf &&
+  ${({ $alignSelf }) =>
+    $alignSelf &&
     `
-    align-self: ${alignSelf};
+    align-self: ${$alignSelf};
   `}
 
-  flex-direction: ${({ flexDirection }) => flexDirection ?? "row"};
-  gap: ${({ spacingSize }) => spacingSize};
+  flex-direction: ${({ $flexDirection }) => $flexDirection ?? "row"};
+  gap: ${({ $spacingSize }) => $spacingSize};
 
-  ${({ wrap }) =>
-    wrap &&
+  ${({ $wrap }) =>
+    $wrap &&
     `
     flex-wrap: wrap;
   `}

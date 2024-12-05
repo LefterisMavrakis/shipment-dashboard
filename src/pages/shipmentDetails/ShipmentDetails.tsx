@@ -88,10 +88,10 @@ const ShipmentDetails = () => {
 
   return (
     <Flex
-      flexDirection="column"
-      spacingSize="24px"
-      alignItems="flex-start"
-      fullwidth
+      $flexDirection="column"
+      $spacingSize="24px"
+      $alignItems="flex-start"
+      $fullwidth
     >
       <Button onClick={navigateToShipmentsModal} variant="text">
         <ArrowBackIosIcon />
@@ -100,15 +100,15 @@ const ShipmentDetails = () => {
 
       <Typography variant="h5">Shipment Details</Typography>
 
-      <StyledFlex spacingSize="12px" fullwidth>
+      <StyledFlex $spacingSize="12px" $fullwidth>
         {!!shipmentDetails && (
-          <StyledCard flexDirection="column">
+          <StyledCard $flexDirection="column">
             {shipmentDetails?.status === "IN PROGRESS" && (
               <Flex
                 data-testid="map-section"
-                flex={1}
-                flexDirection="column"
-                spacingSize="12px"
+                $flex={1}
+                $flexDirection="column"
+                $spacingSize="12px"
               >
                 <StyledFlexBoxWithBorder>
                   <Typography variant="h6">Shipment location</Typography>
@@ -125,41 +125,41 @@ const ShipmentDetails = () => {
 
             <Flex
               data-testid="information-section"
-              flex={1}
-              flexDirection="column"
-              spacingSize="12px"
+              $flex={1}
+              $flexDirection="column"
+              $spacingSize="12px"
             >
               <StyledFlexBoxWithBorder>
                 <Typography variant="h6">Shipment information</Typography>
               </StyledFlexBoxWithBorder>
-              <StyledFlexBox flexDirection="column">
-                <Flex spacingSize="2px" alignItems="center" wrap>
+              <StyledFlexBox $flexDirection="column">
+                <Flex $spacingSize="2px" $alignItems="center" $wrap>
                   <Typography variant="subtitle2">Shipment ID:</Typography>
                   <Typography variant="subtitle1">{shipmentId}</Typography>
                 </Flex>
 
-                <Flex spacingSize="2px" alignItems="center" wrap>
+                <Flex $spacingSize="2px" $alignItems="center" $wrap>
                   <Typography variant="subtitle2">Status:</Typography>
                   <Typography variant="subtitle1">
                     {shipmentDetails.status}
                   </Typography>
                 </Flex>
 
-                <Flex spacingSize="2px" alignItems="center" wrap>
+                <Flex $spacingSize="2px" $alignItems="center" $wrap>
                   <Typography variant="subtitle2">Reference name:</Typography>
                   <Typography variant="subtitle1">
                     {shipmentDetails.referenceName}
                   </Typography>
                 </Flex>
 
-                <Flex spacingSize="2px" alignItems="center" wrap>
+                <Flex $spacingSize="2px" $alignItems="center" $wrap>
                   <Typography variant="subtitle2">Destination name:</Typography>
                   <Typography variant="subtitle1">
                     {shipmentDetails.destinationName}
                   </Typography>
                 </Flex>
 
-                <Flex spacingSize="2px" alignItems="center" wrap>
+                <Flex $spacingSize="2px" $alignItems="center" $wrap>
                   <Typography variant="subtitle2">
                     Planned destination:
                   </Typography>
@@ -171,14 +171,14 @@ const ShipmentDetails = () => {
                   </Typography>
                 </Flex>
 
-                <Flex spacingSize="2px" alignItems="center" wrap>
+                <Flex $spacingSize="2px" $alignItems="center" $wrap>
                   <Typography variant="subtitle2">Departure name:</Typography>
                   <Typography variant="subtitle1">
                     {shipmentDetails.departureName}
                   </Typography>
                 </Flex>
 
-                <Flex spacingSize="2px" alignItems="center" wrap>
+                <Flex $spacingSize="2px" $alignItems="center" $wrap>
                   <Typography variant="subtitle2">
                     Planned departure:
                   </Typography>
@@ -197,10 +197,10 @@ const ShipmentDetails = () => {
         {shipmentDetails?.status === "IN PROGRESS" && (
           <StyledCard
             data-testid="environmental-conditions-section"
-            flexDirection="column"
+            $flexDirection="column"
           >
-            <Flex flex={1} flexDirection="column" spacingSize="12px">
-              <Flex flex={1} flexDirection="column" spacingSize="12px">
+            <Flex $flex={1} $flexDirection="column" $spacingSize="12px">
+              <Flex $flex={1} $flexDirection="column" $spacingSize="12px">
                 <StyledFlexBoxWithBorder>
                   <Typography variant="h6">
                     Current environmental conditions
