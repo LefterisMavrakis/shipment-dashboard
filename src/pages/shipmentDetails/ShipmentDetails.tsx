@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { useParams, useNavigate } from "react-router";
+import { format } from "date-fns";
 import Typography from "@mui/material/Typography";
+import WestIcon from "@mui/icons-material/West";
 import shipmentsAPI from "../../api/api";
 import { ExtendedShipment } from "../../api/types/types";
-import { format } from "date-fns";
 import LocationMap from "../../components/locationMap/LocationMap";
 import HumidityAndTemperatureBarChart, {
   BarChartData,
@@ -17,8 +18,8 @@ import {
 } from "../../components/shared/styledCommon";
 import Flex from "../../components/shared/styledFlex";
 import { StyledCard, StyledFlex } from "./styledComponents";
-import Button from "@mui/material/Button";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { AppButton } from "../../components/shared/styledCommon";
+import DetailRow from "../../components/detailRow/DetailRow";
 
 const ShipmentDetails = () => {
   const [shipmentDetails, setShipmentDetails] = useState<ExtendedShipment>();
@@ -69,12 +70,8 @@ const ShipmentDetails = () => {
 
   const barChartData: BarChartData = [
     {
-      name: "Humidity (%)",
-      value: lastHumidity,
-    },
-    {
-      name: "Temperature (°C)",
-      value: lastTemperature,
+      humidity: lastHumidity,
+      temperature: lastTemperature,
     },
   ];
 
@@ -89,16 +86,14 @@ const ShipmentDetails = () => {
   return (
     <Flex
       $flexDirection="column"
-      $spacingSize="24px"
+      $spacingSize="32px"
       $alignItems="flex-start"
       $fullwidth
     >
-      <Button onClick={navigateToShipmentsModal} variant="text">
-        <ArrowBackIosIcon />
-        Back to company shipments
-      </Button>
-
-      <Typography variant="h5">Shipment Details</Typography>
+      <Flex $spacingSize="8px" $alignItems="center">
+        <WestIcon onClick={navigateToShipmentsModal} />
+        <Typography variant="h5">Shipment Details</Typography>
+      </Flex>
 
       <StyledFlex $spacingSize="12px" $fullwidth>
         {!!shipmentDetails && (
@@ -132,63 +127,44 @@ const ShipmentDetails = () => {
               <StyledFlexBoxWithBorder>
                 <Typography variant="h6">Shipment information</Typography>
               </StyledFlexBoxWithBorder>
+
               <StyledFlexBox $flexDirection="column">
-                <Flex $spacingSize="2px" $alignItems="center" $wrap>
-                  <Typography variant="subtitle2">Shipment ID:</Typography>
-                  <Typography variant="subtitle1">{shipmentId}</Typography>
-                </Flex>
+                <DetailRow
+                  label="Shipment ID"
+                  value={shipmentDetails.shipmentId}
+                />
+                <DetailRow label="Status" value={shipmentDetails.status} />
 
-                <Flex $spacingSize="2px" $alignItems="center" $wrap>
-                  <Typography variant="subtitle2">Status:</Typography>
-                  <Typography variant="subtitle1">
-                    {shipmentDetails.status}
-                  </Typography>
-                </Flex>
+                <DetailRow
+                  label="Reference name"
+                  value={shipmentDetails.referenceName}
+                />
 
-                <Flex $spacingSize="2px" $alignItems="center" $wrap>
-                  <Typography variant="subtitle2">Reference name:</Typography>
-                  <Typography variant="subtitle1">
-                    {shipmentDetails.referenceName}
-                  </Typography>
-                </Flex>
+                <DetailRow
+                  label="Destination name"
+                  value={shipmentDetails.destinationName}
+                />
 
-                <Flex $spacingSize="2px" $alignItems="center" $wrap>
-                  <Typography variant="subtitle2">Destination name:</Typography>
-                  <Typography variant="subtitle1">
-                    {shipmentDetails.destinationName}
-                  </Typography>
-                </Flex>
+                <DetailRow
+                  label="Planned destination"
+                  value={format(
+                    new Date(shipmentDetails.plannedDestination),
+                    "dd MMM yyy hh:ss a"
+                  )}
+                />
 
-                <Flex $spacingSize="2px" $alignItems="center" $wrap>
-                  <Typography variant="subtitle2">
-                    Planned destination:
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    {format(
-                      new Date(shipmentDetails.plannedDestination),
-                      "dd MMM yyy hh:ss a"
-                    )}
-                  </Typography>
-                </Flex>
+                <DetailRow
+                  label="Departure name"
+                  value={shipmentDetails.departureName}
+                />
 
-                <Flex $spacingSize="2px" $alignItems="center" $wrap>
-                  <Typography variant="subtitle2">Departure name:</Typography>
-                  <Typography variant="subtitle1">
-                    {shipmentDetails.departureName}
-                  </Typography>
-                </Flex>
-
-                <Flex $spacingSize="2px" $alignItems="center" $wrap>
-                  <Typography variant="subtitle2">
-                    Planned departure:
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    {format(
-                      new Date(shipmentDetails.plannedDeparture),
-                      "dd MMM yyy hh:ss a"
-                    )}
-                  </Typography>
-                </Flex>
+                <DetailRow
+                  label="Planned departure"
+                  value={format(
+                    new Date(shipmentDetails.plannedDeparture),
+                    "dd MMM yyy hh:ss a"
+                  )}
+                />
               </StyledFlexBox>
             </Flex>
           </StyledCard>
@@ -206,15 +182,18 @@ const ShipmentDetails = () => {
                     Current environmental conditions
                   </Typography>
                 </StyledFlexBoxWithBorder>
+
                 <StyledFlexBox>
                   <HumidityAndTemperatureBarChart chartData={barChartData} />
                 </StyledFlexBox>
               </Flex>
+
               <StyledFlexBoxWithBorder>
                 <Typography variant="h6">
                   Environmental conditions timeline
                 </Typography>
               </StyledFlexBoxWithBorder>
+
               <StyledFlexBox>
                 <HumidityAndLocationLineChart chartData={lineChartData} />
               </StyledFlexBox>

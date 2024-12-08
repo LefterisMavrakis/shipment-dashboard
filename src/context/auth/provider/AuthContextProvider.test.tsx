@@ -34,31 +34,6 @@ describe("AuthContextProvider", () => {
     expect(screen.getByText("Username: None")).toBeInTheDocument();
   });
 
-  it("should log in the user with correct credentials", () => {
-    render(
-      <AuthContextProvider>
-        <AuthContext.Consumer>
-          {(context) => (
-            <div>
-              <span>
-                Authenticated: {context?.isAuthenticated ? "Yes" : "No"}
-              </span>
-              <span>Username: {context?.authUser?.username || "None"}</span>
-              <button onClick={() => context?.login("testuser", "password")}>
-                Log In
-              </button>
-            </div>
-          )}
-        </AuthContext.Consumer>
-      </AuthContextProvider>
-    );
-
-    fireEvent.click(screen.getByText("Log In"));
-
-    expect(screen.getByText("Authenticated: Yes")).toBeInTheDocument();
-    expect(screen.getByText("Username: testuser")).toBeInTheDocument();
-  });
-
   it("should not log in the user with incorrect credentials", () => {
     render(
       <AuthContextProvider>
@@ -84,6 +59,31 @@ describe("AuthContextProvider", () => {
 
     expect(screen.getByText("Authenticated: No")).toBeInTheDocument();
     expect(screen.getByText("Username: None")).toBeInTheDocument();
+  });
+
+  it("should log in the user with correct credentials", () => {
+    render(
+      <AuthContextProvider>
+        <AuthContext.Consumer>
+          {(context) => (
+            <div>
+              <span>
+                Authenticated: {context?.isAuthenticated ? "Yes" : "No"}
+              </span>
+              <span>Username: {context?.authUser?.username || "None"}</span>
+              <button onClick={() => context?.login("testuser", "password")}>
+                Log In
+              </button>
+            </div>
+          )}
+        </AuthContext.Consumer>
+      </AuthContextProvider>
+    );
+
+    fireEvent.click(screen.getByText("Log In"));
+
+    expect(screen.getByText("Authenticated: Yes")).toBeInTheDocument();
+    expect(screen.getByText("Username: testuser")).toBeInTheDocument();
   });
 
   it("should log out the user", () => {

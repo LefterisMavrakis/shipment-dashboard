@@ -1,19 +1,29 @@
 import { format } from "date-fns";
 import { useNavigate } from "react-router";
-import ConstructionIcon from "@mui/icons-material/Construction";
-import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import { Company } from "../../api/types/types";
-import { Card, IconBox, StyledFlexBox } from "../shared/styledCommon";
+import iconElectronics from "../../assets/svg/electronic.svg";
+import iconSemiFinished from "../../assets/svg/semi_finished.svg";
+import { Card, GradientIconBox, StyledFlexBox } from "../shared/styledCommon";
 import Flex from "../shared/styledFlex";
-import { StyledFlexBoxWithBorder } from "./styledComponents";
+import { StyledFlexBoxWithBorder } from "../shared/styledCommon";
+import { AppButton } from "../shared/styledCommon";
+import EastIcon from "@mui/icons-material/East";
+import DetailRow from "../detailRow/DetailRow";
 
 type CompanyItemProps = Company;
 
 const COMPANY_TYPE_ICONS_MAP: Record<string, React.ReactElement> = {
-  SEMI_FINISHED_PRODUCTS: <ConstructionIcon />,
-  ELECTRICS_ELECTRONICS: <PrecisionManufacturingIcon />,
+  SEMI_FINISHED_PRODUCTS: (
+    <GradientIconBox>
+      <img src={iconSemiFinished} alt="" />
+    </GradientIconBox>
+  ),
+  ELECTRICS_ELECTRONICS: (
+    <GradientIconBox>
+      <img src={iconElectronics} alt="" />
+    </GradientIconBox>
+  ),
 };
 
 const CompanyItem = (props: CompanyItemProps) => {
@@ -44,49 +54,43 @@ const CompanyItem = (props: CompanyItemProps) => {
 
   return (
     <>
-      <Card $flexDirection="column">
+      <Card $flexDirection="column" data-testid="company-item">
         <StyledFlexBoxWithBorder
           $spacingSize="8px"
           $alignItems="center"
           $justifyContent="space-between"
         >
-          <Flex $spacingSize="8px" $alignItems="center">
-            <IconBox>{COMPANY_TYPE_ICONS_MAP[businessType]}</IconBox>
-            <Typography variant="h6">{name}</Typography>
-          </Flex>
+          <Flex $spacingSize="12px" $alignItems="center">
+            {COMPANY_TYPE_ICONS_MAP[businessType]}
 
-          <Button onClick={navigateToShipmentsModal} variant="text">
-            Shipments
-          </Button>
-        </StyledFlexBoxWithBorder>
-
-        <StyledFlexBox $flexDirection="column" $spacingSize="2px">
-          <Flex $spacingSize="2px" $alignItems="center" $wrap>
-            <Typography variant="subtitle2">Address:</Typography>
-            <Typography variant="subtitle1">{companyAddress}</Typography>
-          </Flex>
-
-          <Flex $spacingSize="2px" $alignItems="center" $wrap>
-            <Typography variant="subtitle2">Incorporation country:</Typography>
-            <Typography variant="subtitle1">
-              {countryOfIncorporation}
+            <Typography variant="h6" style={{ fontWeight: "800" }}>
+              {name}
             </Typography>
           </Flex>
 
-          <Flex $spacingSize="2px" $alignItems="center" $wrap>
-            <Typography variant="subtitle2">Registration number:</Typography>
-            <Typography variant="subtitle1">{registrationNumber}</Typography>
-          </Flex>
+          <AppButton
+            onClick={navigateToShipmentsModal}
+            variant="contained"
+            data-testid="shipments-button"
+          >
+            <Flex $spacingSize="8px" $alignItems="center">
+              <Typography variant="body2" style={{ fontWeight: "700" }}>
+                Shipments
+              </Typography>
+              <EastIcon />
+            </Flex>
+          </AppButton>
+        </StyledFlexBoxWithBorder>
 
-          <Flex $spacingSize="2px" $alignItems="center" $wrap>
-            <Typography variant="subtitle2">Verified at:</Typography>
-            <Typography variant="subtitle1">{verifiedAt}</Typography>
-          </Flex>
-
-          <Flex $spacingSize="2px" $alignItems="center" $wrap>
-            <Typography variant="subtitle2">Created at:</Typography>
-            <Typography variant="subtitle1">{createdDate}</Typography>
-          </Flex>
+        <StyledFlexBox $flexDirection="column" $spacingSize="8px">
+          <DetailRow label={"Address"} value={companyAddress} />
+          <DetailRow
+            label={"Incorporation country"}
+            value={countryOfIncorporation}
+          />
+          <DetailRow label={"Registration number"} value={registrationNumber} />
+          <DetailRow label={"Verified at"} value={verifiedAt} />
+          <DetailRow label={"Created at"} value={createdDate} />
         </StyledFlexBox>
       </Card>
     </>

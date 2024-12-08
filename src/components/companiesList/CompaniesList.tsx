@@ -24,7 +24,7 @@ const CompaniesList = () => {
   }, []);
 
   return (
-    <Flex $flexDirection="column" $spacingSize="18px" $fullwidth>
+    <Flex $flexDirection="column" $spacingSize="32px" $fullwidth>
       <Typography variant="h5">Companies list</Typography>
 
       <GridContainer>

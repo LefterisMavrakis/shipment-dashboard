@@ -15,12 +15,31 @@ import companiesMock from "../../api/data/companies.json";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiPaper-root": {
-    minHeight: "60vh",
     maxHeight: "80vh",
     height: "100%",
+    borderRadius: "40px",
   },
-  "& .MuiDialogActions-root": {
-    padding: theme.spacing(1),
+  "& .MuiDialogContent-root": {
+    padding: "24px 40px",
+    borderBottom: "none",
+  },
+  "& .MuiDialogTitle-root": {
+    fontWeight: "800",
+    padding: "32px 40px 25px 40px",
+  },
+  "@media (max-width: 767px)": {
+    "& .MuiDialogTitle-root": {
+      fontWeight: "800",
+      padding: "20px 50px 20px 20px",
+    },
+    "& .MuiDialogContent-root": {
+      padding: "20px",
+      borderBottom: "none",
+    },
+    "& .MuiIconButton-root": {
+      top: 18,
+      right: 10,
+    },
   },
 }));
 
@@ -67,7 +86,7 @@ const ShipmentsModal = () => {
         sx={{ m: 0, p: 2, paddingRight: 7 }}
         id="customized-dialog-title"
       >
-        {`${companyName || "Company"} - Shipments(${companyShipments.length})`}
+        {`${companyName || "Company"} - Shipments (${companyShipments.length})`}
       </DialogTitle>
 
       <IconButton
@@ -75,8 +94,8 @@ const ShipmentsModal = () => {
         onClick={closeModal}
         sx={(theme) => ({
           position: "absolute",
-          right: 8,
-          top: 12,
+          right: 30,
+          top: 30,
           color: theme.palette.grey[500],
         })}
       >
@@ -85,13 +104,15 @@ const ShipmentsModal = () => {
 
       <DialogContent dividers>
         {hasShipments ? (
-          <Flex $flexDirection="column" $spacingSize="12px" $fullwidth>
-            {companyShipments.map((shipment) => (
-              <ShipmentItem {...shipment} />
+          <Flex $flexDirection="column" $spacingSize="32px" $fullwidth>
+            {companyShipments.map((shipment, index) => (
+              <ShipmentItem key={index} {...shipment} index={index + 1} />
             ))}
           </Flex>
         ) : (
-          <Typography>No shipments</Typography>
+          <Flex $justifyContent="center" $fullwidth>
+            <Typography>There are no shipments for this company</Typography>
+          </Flex>
         )}
       </DialogContent>
     </BootstrapDialog>

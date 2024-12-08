@@ -114,11 +114,7 @@ describe("ShipmentDetails Component", () => {
       </MemoryRouter>
     );
 
-    await waitFor(() => {
-      expect(screen.getByText("Back to company shipments")).toBeInTheDocument();
-    });
-
-    const backButton = screen.getByText("Back to company shipments");
+    const backButton = screen.getByTestId("WestIcon");
     userEvent.click(backButton);
 
     expect(navigateMock).not.toThrow();

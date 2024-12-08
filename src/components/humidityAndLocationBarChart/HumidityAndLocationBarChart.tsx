@@ -10,8 +10,8 @@ import {
 } from "recharts";
 
 export type BarChartData = {
-  name: string;
-  value: number;
+  humidity: number;
+  temperature: number;
 }[];
 
 type BarChartProps = {
@@ -38,7 +38,18 @@ const HumidityAndTemperatureBarChart = ({ chartData }: BarChartProps) => {
           <YAxis domain={[0, 100]} />
           <Tooltip />
           <Legend />
-          <Bar dataKey="value" stackId="a" fill="#8884d8" />
+          <Bar
+            dataKey="humidity"
+            name="Humidity (%)"
+            stackId="a"
+            fill="#0E0063"
+          />
+          <Bar
+            dataKey="temperature"
+            name="Temperature (°C)"
+            stackId="b"
+            fill="#f69800"
+          />
         </BarChart>
       </ResponsiveContainer>
     </div>

@@ -7,6 +7,4 @@ describe("useAuth", () => {
 
     expect(result.current).toEqual(undefined);
   });
-
-  //TODO: Add test for positive context assertion
 });

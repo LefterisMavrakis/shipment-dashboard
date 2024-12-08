@@ -3,10 +3,11 @@ import { NavLink } from "react-router";
 import Typography from "@mui/material/Typography";
 import { Shipment } from "../../api/types/types";
 import Flex from "../shared/styledFlex";
-import { ShipmentCard } from "./styledComponents";
-import { StyledFlexBox } from "../shared/styledCommon";
+import EastIcon from "@mui/icons-material/East";
+import { AppButton } from "../shared/styledCommon";
+import DetailRow from "../detailRow/DetailRow";
 
-type ShipmentItemProps = Shipment;
+type ShipmentItemProps = Shipment & { index: number };
 
 const ShipmentItem = (props: ShipmentItemProps) => {
   const {
@@ -17,6 +18,7 @@ const ShipmentItem = (props: ShipmentItemProps) => {
     departureName,
     plannedDeparture,
     plannedDestination,
+    index,
   } = props;
 
   const plannedDepartureDate = format(new Date(plannedDeparture), "dd-MM-yyyy");
@@ -26,48 +28,44 @@ const ShipmentItem = (props: ShipmentItemProps) => {
   );
 
   return (
-    <ShipmentCard>
-      <NavLink to={`/details/${shipmentId}`}>
-        <StyledFlexBox $flexDirection="column">
-          <Flex $spacingSize="2px" $alignItems="center" $wrap>
-            <Typography variant="subtitle2">Shipment ID:</Typography>
-            <Typography variant="subtitle1">{shipmentId}</Typography>
-          </Flex>
+    <Flex $flexDirection="column" $spacingSize="12px">
+      <Flex
+        $justifyContent="space-between"
+        $alignItems="center"
+        $spacingSize="8px"
+      >
+        <Typography
+          variant="subtitle1"
+          style={{ fontWeight: "800", color: "#66637A" }}
+        >
+          Shipment {index}
+        </Typography>
 
-          <Flex $spacingSize="2px" $alignItems="center" $wrap>
-            <Typography variant="subtitle2">Status:</Typography>
-            <Typography variant="subtitle1">{status}</Typography>
-          </Flex>
+        <NavLink to={`/details/${shipmentId}`}>
+          <AppButton variant="contained">
+            <Flex $spacingSize="8px" $alignItems="center">
+              <Typography variant="body2" style={{ fontWeight: "700" }}>
+                Details
+              </Typography>
+              <EastIcon />
+            </Flex>
+          </AppButton>
+        </NavLink>
+      </Flex>
 
-          <Flex $spacingSize="2px" $alignItems="center" $wrap>
-            <Typography variant="subtitle2">Reference name:</Typography>
-            <Typography variant="subtitle1">{referenceName}</Typography>
-          </Flex>
-
-          <Flex $spacingSize="2px" $alignItems="center" $wrap>
-            <Typography variant="subtitle2">Destination name:</Typography>
-            <Typography variant="subtitle1">{destinationName}</Typography>
-          </Flex>
-
-          <Flex $spacingSize="2px" $alignItems="center" $wrap>
-            <Typography variant="subtitle2">Planned destination:</Typography>
-            <Typography variant="subtitle1">
-              {plannedDestinationDate}
-            </Typography>
-          </Flex>
-
-          <Flex $spacingSize="2px" $alignItems="center" $wrap>
-            <Typography variant="subtitle2">Departure name:</Typography>
-            <Typography variant="subtitle1">{departureName}</Typography>
-          </Flex>
-
-          <Flex $spacingSize="2px" $alignItems="center" $wrap>
-            <Typography variant="subtitle2">Planned departure:</Typography>
-            <Typography variant="subtitle1">{plannedDepartureDate}</Typography>
-          </Flex>
-        </StyledFlexBox>
-      </NavLink>
-    </ShipmentCard>
+      <Flex $flexDirection="column" $spacingSize="8px">
+        <DetailRow label={"Shipment ID"} value={shipmentId} />
+        <DetailRow label={"Status"} value={status} />
+        <DetailRow label={"Reference name"} value={referenceName} />
+        <DetailRow label={"Destination name"} value={destinationName} />
+        <DetailRow
+          label={"Planned destination"}
+          value={plannedDestinationDate}
+        />
+        <DetailRow label={"Departure name"} value={departureName} />
+        <DetailRow label={"Planned departure"} value={plannedDepartureDate} />
+      </Flex>
+    </Flex>
   );
 };
 

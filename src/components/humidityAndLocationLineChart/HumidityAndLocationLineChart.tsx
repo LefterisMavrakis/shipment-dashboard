@@ -36,17 +36,19 @@ const HumidityAndLocationLineChart = ({
           />
           <Tooltip />
           <Legend />
-          <Line
-            type="monotone"
-            dataKey="temperature"
-            stroke="#8884d8"
-            name="Temperature (°C)"
-          />
+
           <Line
             type="monotone"
             dataKey="humidity"
-            stroke="#82ca9d"
+            stroke="#0E0063"
             name="Humidity (%)"
+          />
+
+          <Line
+            type="monotone"
+            dataKey="temperature"
+            stroke="#f69800"
+            name="Temperature (°C)"
           />
         </LineChart>
       </ResponsiveContainer>

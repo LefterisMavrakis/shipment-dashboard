@@ -1,4 +1,4 @@
-import React, { createContext, useState, useCallback } from "react";
+import React, { createContext, useState, useCallback, useEffect } from "react";
 import { authUsersMock } from "../../../api";
 
 type AuthUser = {
@@ -55,6 +55,28 @@ const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
 
     localStorage.clear();
   }, [setIsAuthenticated, setAuthUser]);
+
+  const validateAuthInstance = useCallback(() => {
+    const localStorageAuth = localStorage.getItem("isAuthenticated") === "true";
+    const localStorageAuthUser = localStorage.getItem("authUserName");
+
+    const dbUser = authUsersMock.find(
+      (user) => user.username === localStorageAuthUser
+    );
+
+    if (localStorageAuth && localStorageAuthUser && !!login && dbUser) {
+      login(dbUser.username, dbUser.password);
+      return;
+    }
+
+    if (!!logout) {
+      logout();
+    }
+  }, [login, logout]);
+
+  useEffect(() => {
+    validateAuthInstance();
+  }, [validateAuthInstance]);
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, authUser, login, logout }}>
